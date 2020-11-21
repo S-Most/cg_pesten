@@ -1,0 +1,110 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  user-select: none;
+}
+
+body .playingField {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+body .playingField .card {
+  height: 10rem;
+  width: 6rem;
+  margin: 0.2rem;
+  border: 1px solid #000;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  background: #fff;
+  position: relative;
+}
+
+body .playingField .red {
+  color: red;
+}
+
+body .playingField .black {
+  color: black;
+}
+
+body .playingField .stack {
+  background: cornflowerblue;
+  color: #fff;
+  font-size: 4rem;
+}
+
+body .playingField .playercard,
+body .playingField .stack {
+  cursor: pointer;
+}
+
+body .playingField .computercard,
+body .playingField .computercard::before,
+body .playingField .computercard::after {
+  font-size: 0 !important;
+  background: coral;
+}
+
+body .playingField .card::before,
+body .playingField .card::after {
+  content: attr(data-value);
+  position: absolute;
+  font-size: 2rem;
+  letter-spacing: -2px;
+}
+
+body .playingField .card::before {
+  top: 0.5rem;
+  left: 0.5rem;
+}
+
+body .playingField .card::after {
+  bottom: 0.5rem;
+  right: 0.5rem;
+  transform: rotate(180deg);
+}
+
+body .playingField .computerCards {
+  height: 11rem;
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+body .playingField .middle {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+body .playingField .middle .cardStack .card {
+  background: green;
+}
+
+body .playingField .playerCards {
+  height: 11rem;
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+/*# sourceMappingURL=style.css.map */
