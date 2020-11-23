@@ -75,7 +75,7 @@ function betweenRounds(){
     updateDeckCount()
     let winner = checkWinner()
     if (winner === "player" || winner === "computer")
-    {console.log("winner, winner")} else {
+    {console.log("Game Over!")} else {
     inRound()}
 }
 

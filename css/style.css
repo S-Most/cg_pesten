@@ -111,18 +111,23 @@ body .playingField .middle .playedCards {
 
 body .playingField .playerCards {
   min-height: 11rem;
+  height: fit-content;
   width: 80%;
+  margin-bottom: 7rem;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+}
+
+body .playingField .playerCards .h2 {
+  margin-bottom: 3rem;
 }
 
 body .playingField .playerCards .card {
   margin-left: -1rem;
   margin-right: -1rem;
-  margin-bottom: -2rem;
-  margin-top: -2rem;
+  margin-bottom: -5rem;
 }
 /*# sourceMappingURL=style.css.map */
