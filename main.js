@@ -6,15 +6,8 @@ const computerHandEle = document.querySelector(".computerCards")
 const playedCardsEle = document.querySelector(".playedCards")
 const deckEle = document.querySelector(".cardStack")
 
-
-
-let playedCard, playerHand, computerHand, deck
-let inRound = false
-let playerTurn = true
-let str_Class_player = "playercard"
-let str_Class_computer = "computercard"
-
-let playerObject
+let playedCard, playedCardHTML ,playerHand, computerHand, deck, emptyDeck
+let yourTurn = true
 
 deckEle.addEventListener("click", function(){
     drawCard()
@@ -23,7 +16,8 @@ deckEle.addEventListener("click", function(){
 createObjects()
 function createObjects(){
 
-    deck = new Deck(4,13);
+    deck = new Deck(4,13)
+    emptyDeck = new Deck(0,0)
 
     playerHand = new Hand()
     playerHand.drawCards(5,deck)
@@ -35,69 +29,135 @@ function createObjects(){
 }
 
 function generateRound(){
-
-    generateHand(playerHand, playerHandEle, str_Class_player)
-    generateHand(computerHand, computerHandEle, str_Class_computer)
+    generateHands()
     generateMiddle()
-    playRound()
+    updateDeckCount()
+    inRound()
 }
 
 function generateHand(hand,handEle,cardClass){
-    
     handEle.innerHTML=""
     for(let i=0; i<hand.cards.length;i++) {
-
         let cardObject = hand.cards[i].generateHTML()
         cardObject.classList.add(cardClass)
         handEle.appendChild(cardObject)
     }
-    updateDeckCount()
-    
 }
 
 function generateMiddle(){
-
-    playedCard = deck.pop().generateHTML()
-    playedCardsEle.appendChild(playedCard)
+    playedCard = deck.pop()
+    playedCardHTML = playedCard.generateHTML()
+    playedCardsEle.appendChild(playedCardHTML)
     deckEle.classList.add("card","stack")
-    updateDeckCount()
-
 }
 
 function updateDeckCount(){
     deckEle.innerText = deck.numberOfCards
 }
 
-function playRound(){
-    inRound = true
-    userInput()
-    
-}
-
-function drawCard(){
-    if (playerTurn){
-
-        playerHand.drawCards(1,deck)
-        userInput()
+function inRound(){
+    if (yourTurn){
+        addEventlisteners()
+        console.log("myTurn")
+    } else {
+        console.log("pcTurn")
+        setTimeout(() => { pcMoves()},1000)
     }
 }
 
+function generateHands(){
+    generateHand(playerHand, playerHandEle, "playercard")
+    generateHand(computerHand, computerHandEle, "computercard")
+}
+
+function betweenRounds(){
+    generateHands()
+    updateDeckCount()
+    let winner = checkWinner()
+    if (winner === "player" || winner === "computer")
+    {console.log("winner, winner")} else {
+    inRound()}
+}
+
+function pcMoves(){
+    for (let j = 0; j<computerHand.cards.length; j++){
+        let card = computerHand.cards[j]
+
+        if (canPlay(card)){
+            yourTurn = !yourTurn
+            console.log("computer played:", card.value, card.suit)
+            playCard(card)
+            computerHand.cards.splice(j,1)
+            betweenRounds()
+            return
+        }
+    } if (!yourTurn) {drawCard()}
+}   
+
+function drawCard(){
+    checkEmpty()
+    if (yourTurn){
+        playerHand.drawCards(1,deck)
+    } else { 
+        computerHand.drawCards(1,deck)
+    }
+    yourTurn = !yourTurn
+    generateHands()
+    updateDeckCount()
+    inRound()
+}
+    
 function addEventlisteners(){
-
     for (let i=0; i < playerHand.numberOfCards; i++){
-
         playerHandEle.children[i].addEventListener("click", function(){
-
             let card = playerHand.cards[i]
-            playerHand.cards.splice(i,1)
-            console.log("deze kaart wordt gespeeld:", card)
-            userInput()
+            if (canPlay(card)){
+                yourTurn = !yourTurn
+                console.log("you played:", card.value, card.suit)
+                playCard(card)
+                playerHand.cards.splice(i,1)
+                betweenRounds()
+                return
+            } else {
+                console.log("Warning:",card.value, "!=", playedCard.value, " && ", card.suit, "!=", playedCard.suit)
+            }
         })
     }
 }
 
-function userInput(){
-
-    generateHand(playerHand, playerHandEle, str_Class_player)
-    addEventlisteners()
+function playCard(card){
+    emptyDeck.push(playedCard)
+    playedCardsEle.innerHTML=""
+    playedCardsEle.appendChild(card.generateHTML())
+    playedCard = card
 }
+
+function canPlay(card){
+    if (playedCard.value === card.value || playedCard.suit === card.suit){
+        return true
+    } else { return false }
+    
+}
+
+function checkEmpty(){
+    if (deck.numberOfCards === 0){
+        deck = emptyDeck
+        deck.shuffle()
+        emptyDeck = new Deck(0,0)
+    }
+}
+
+function checkWinner(){
+    if (playerHand.cards.length === 0){
+        console.log("You Won")
+        playerHandEle.innerText="You Win!"
+        return "player"
+
+    } else if (computerHand.cards.length === 0){
+        console.log("You Lost")
+        computerHandEle.innerText="Wou Loose!"
+        return "computer"
+
+    }
+}
+
