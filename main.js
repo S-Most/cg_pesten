@@ -20,7 +20,7 @@ function createObjects(){
     emptyDeck = new Deck(0,0)
 
     playerHand = new Hand()
-    playerHand.drawCards(1,deck)
+    playerHand.drawCards(5,deck)
 
     computerHand = new Hand()
     computerHand.drawCards(5,deck)
