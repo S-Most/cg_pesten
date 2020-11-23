@@ -19,8 +19,8 @@ body {
         align-items: center;
 
         .card {
-            height: 10rem;
-            width: 6rem;
+            height: 8rem;
+            width: 5rem;
             margin: 0.2rem;
 
             border: 1px solid #000;
@@ -29,7 +29,7 @@ body {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 5rem;
+            font-size: 3rem;
             background: #fff;
             position: relative;
         }
@@ -45,7 +45,7 @@ body {
         .stack {
             background: cornflowerblue;
             color: #fff;
-            font-size: 4rem;
+            font-size: 3rem;
         }
 
         .playercard,
@@ -81,12 +81,18 @@ body {
 
         .computerCards {
             height: 11rem;
-            width: 95%;
+            max-width: 95% !important;
+            width: 80%;
 
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
+
+            .card {
+                margin-left: -1rem;
+                margin-right: -1rem;
+            }
         }
 
         .middle {
@@ -97,19 +103,29 @@ body {
 
             .cardStack {
                 .card {
-                    background: green;
+                    margin: 0rem;
                 }
+            }
+            .playedCards {
+                margin: 0rem;
             }
         }
 
         .playerCards {
-            height: 11rem;
-            width: 95%;
-
+            min-height: 11rem;
+            width: 80%;
             display: flex;
+            flex-wrap: wrap;
             flex-direction: row;
             justify-content: center;
             align-items: center;
+
+            .card {
+                margin-left: -1rem;
+                margin-right: -1rem;
+                margin-bottom: -2rem;
+                margin-top: -2rem;
+            }
         }
     }
 }

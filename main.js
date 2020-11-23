@@ -61,7 +61,7 @@ function inRound(){
         console.log("myTurn")
     } else {
         console.log("pcTurn")
-        setTimeout(() => { pcMoves()},1000)
+        setTimeout(() => { pcMoves()},500)
     }
 }
 
