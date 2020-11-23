@@ -150,12 +150,12 @@ function checkEmpty(){
 function checkWinner(){
     if (playerHand.cards.length === 0){
         console.log("You Won")
-        playerHandEle.innerText="You Win!"
+        playerHandEle.innerHTML="<h2>You Win!<h2/>"
         return "player"
 
     } else if (computerHand.cards.length === 0){
         console.log("You Lost")
-        computerHandEle.innerText="Wou Loose!"
+        computerHandEle.innerHTML="<h2>You Loose!<h2/>"
         return "computer"
 
     }
