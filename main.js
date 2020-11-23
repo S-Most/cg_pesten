@@ -73,10 +73,12 @@ function generateHands(){
 function betweenRounds(){
     generateHands()
     updateDeckCount()
-    let winner = checkWinner()
-    if (winner === "player" || winner === "computer")
-    {console.log("Game Over!")} else {
-    inRound()}
+    let game = checkWinner()
+    if (game === "over")
+    {console.log("Game Over!")} 
+    else {
+    inRound()
+}
 }
 
 function pcMoves(){
@@ -151,13 +153,12 @@ function checkWinner(){
     if (playerHand.cards.length === 0){
         console.log("You Won")
         playerHandEle.innerHTML="<h2>You Win!<h2/>"
-        return "player"
+        return "over"
 
     } else if (computerHand.cards.length === 0){
         console.log("You Lost")
         computerHandEle.innerHTML="<h2>You Loose!<h2/>"
-        return "computer"
-
+        return "over"
     }
 }
 
