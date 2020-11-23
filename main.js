@@ -9,7 +9,7 @@ const deckEle = document.querySelector(".cardStack")
 let playedCard, playedCardHTML ,playerHand, computerHand, deck, emptyDeck
 let yourTurn = true
 
-deckEle.addEventListener("click", function(){
+deckEle.addEventListener("click", () =>{
     drawCard()
 })
 
@@ -20,7 +20,7 @@ function createObjects(){
     emptyDeck = new Deck(0,0)
 
     playerHand = new Hand()
-    playerHand.drawCards(5,deck)
+    playerHand.drawCards(1,deck)
 
     computerHand = new Hand()
     computerHand.drawCards(5,deck)
@@ -152,12 +152,12 @@ function checkEmpty(){
 function checkWinner(){
     if (playerHand.cards.length === 0){
         console.log("You Won")
-        playerHandEle.innerHTML="<h2>You Win!<h2/>"
+        playerHandEle.innerHTML="<h2>You Win!</br>Play again?</h2>"
         return "over"
 
     } else if (computerHand.cards.length === 0){
         console.log("You Lost")
-        computerHandEle.innerHTML="<h2>You Loose!<h2/>"
+        computerHandEle.innerHTML="<h2>You Loose!</br>Play again?</h2>"
         return "over"
     }
 }

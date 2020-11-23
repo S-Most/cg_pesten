@@ -89,6 +89,12 @@ body .playingField .computerCards {
   align-items: center;
 }
 
+body .playingField .computerCards .h2 {
+  margin-bottom: 3rem;
+  line-height: 2rem;
+  text-align: center;
+}
+
 body .playingField .computerCards .card {
   margin-left: -1rem;
   margin-right: -1rem;
@@ -123,6 +129,8 @@ body .playingField .playerCards {
 
 body .playingField .playerCards .h2 {
   margin-bottom: 3rem;
+  line-height: 2rem;
+  text-align: center;
 }
 
 body .playingField .playerCards .card {

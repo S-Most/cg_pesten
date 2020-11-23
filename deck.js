@@ -53,9 +53,7 @@ class Card {
 
     get color(){
         return this.suit === '♥' || this.suit === '♦' ? 'red' : 'black'
-        //watch out for different suits
     }
-
 
     generateHTML(){
         const cardDiv = document.createElement('div')
@@ -83,7 +81,7 @@ export class Hand {
     }
 
 }
-//global functions ------------------------------
+
 
 function generateDeck(numSuits, numValues){
     return SUITS.slice(0,numSuits).flatMap((suit) => {
