@@ -32,7 +32,15 @@ deckEle.addEventListener("click", () =>{
 createObjects()
 function createObjects(){
 
-    deck = new Deck(4,13)
+    deck = new Deck(4,5)
+    let jokerCards = deck.generateJokers(4)
+    console.log(jokerCards)
+
+    deck.cards.push(jokerCards)
+    deck.cards = deck.cards.flat()
+    console.log(deck.cards)
+    deck.shuffle()
+
     emptyDeck = new Deck(0,0)
 
     playerHand = new Hand()
@@ -53,7 +61,8 @@ function generateRound(){
 
 function generateHand(hand,handEle,cardClass){
     handEle.innerHTML=""
-    for(let i=0; i<hand.cards.length;i++) {
+    console.log(hand.cards.length, hand.cards)
+    for(let i=0; i<hand.cards.length; i++) {
         let cardObject = hand.cards[i].generateHTML()
         cardObject.classList.add(cardClass)
         handEle.appendChild(cardObject)
@@ -119,7 +128,6 @@ function pcMoves(){
         if (canPlay(card)){
             let action = checkValue(card)
             actUpon(action)
-            // yourTurn = !yourTurn
             console.log("computer played:", card.value, card.suit)
             playCard(card)
             computerHand.cards.splice(j,1)
@@ -155,13 +163,28 @@ function checkValue(card){
     if (card.value ==="2"){
         return "draw"
     }
-    
+    if (card.value === "Joker"){
+        return "joker"
+    }
 }
 
 function actUpon(action){
     if (action === "wait"){
         } else { yourTurn = !yourTurn }
 
+    if (action === "joker"){
+        if (yourTurn){
+            console.log("draw 5 cards")
+            let tePakken = playerHand.drawCards(5, deck)
+            checkEmpty()
+            playerHand.drawCards(tePakken, deck)
+        } else { 
+            console.log("draw 5 cards")
+            let tePakken = computerHand.drawCards(5, deck)
+            checkEmpty()
+            computerHand.drawCards(tePakken, deck)
+        }
+    }
     if (action === "draw"){
         if (yourTurn){
             console.log("draw 2 cards")
@@ -200,7 +223,7 @@ function playCard(card){
 }
 
 function canPlay(card){
-    if (playedCard.value === card.value || playedCard.suit === card.suit){
+    if (playedCard.value === card.value || playedCard.suit === card.suit || playedCard.suit === "*" || card.suit === "*"){
         return true
     } else { return false }
     

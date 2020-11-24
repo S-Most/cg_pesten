@@ -1,4 +1,4 @@
-const SUITS = ["♥","♠","♦","♣","✪"]
+const SUITS = ["♥","♠","♦","♣"]
 const VALUES = [
     "A",
     "2",
@@ -21,6 +21,16 @@ export default class Deck {
         this.cards = cards
         this.shuffle()
         console.log("new", this.cards)
+    }
+
+    generateJokers(numJokers){
+        if (numJokers !== 1 && numJokers !== 2 && numJokers !== 3 && numJokers !== 4){
+            numJokers = 2
+        }
+        let cards = []
+        for (let i=0; i<numJokers; i++){
+            cards.push(new Card("*", "Joker"))
+        } return cards
     }
 
     get numberOfCards() {
@@ -75,13 +85,15 @@ export class Hand {
     }
 
     drawCards(numCards, deck){
+        let tePakken = numCards
         for (let i=0;i<numCards;i++){
-            this.cards.push(deck.pop())
-        }
+            if (deck.numberOfCards > 0){
+                this.cards.push(deck.pop())
+                tePakken -= 1
+            } else {return tePakken}
+        }  
     }
-
 }
-
 
 function generateDeck(numSuits, numValues){
     return SUITS.slice(0,numSuits).flatMap((suit) => {
@@ -90,5 +102,6 @@ function generateDeck(numSuits, numValues){
         })
     })
 }
+
 
 
