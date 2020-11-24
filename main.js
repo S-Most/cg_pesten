@@ -32,7 +32,7 @@ deckEle.addEventListener("click", () =>{
 createObjects()
 function createObjects(){
 
-    deck = new Deck(4,5)
+    deck = new Deck(4,13)
     let jokerCards = deck.generateJokers(4)
     console.log(jokerCards)
 
