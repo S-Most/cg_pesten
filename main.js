@@ -1,6 +1,22 @@
 import Deck from "./deck.js"
 import {Hand} from "./deck.js"
 
+const CARD_VALUE_MAP = {
+    "2": 2,
+    "3": 3,
+    "4": 4,
+    "5": 5,    
+    "6": 6,
+    "7": 7,
+    "8": 8,
+    "9": 9,
+    "10": 10,
+    "J": 11,
+    "Q": 12,
+    "K": 13,
+    "A": 14
+}
+
 const playerHandEle = document.querySelector(".playerCards")
 const computerHandEle = document.querySelector(".computerCards")
 const playedCardsEle = document.querySelector(".playedCards")
@@ -61,11 +77,26 @@ function inRound(){
         console.log("myTurn")
     } else {
         console.log("pcTurn")
-        setTimeout(() => { pcMoves()},500)
+        setTimeout(() => pcMoves(), 500)
+    }
+}
+
+function sortPlayerHand(){
+    for(let j=0; j<playerHand.cards.length; j++){
+        for(let i=0; i<playerHand.cards.length-1; i++){
+            if (playerHand.cards[i].suit < playerHand.cards[i+1].suit || 
+                playerHand.cards[i].suit == playerHand.cards[i+1].suit && CARD_VALUE_MAP[playerHand.cards[i].value] < CARD_VALUE_MAP[playerHand.cards[i+1].value]) {
+
+                let tempCard = playerHand.cards[i]
+                playerHand.cards[i] = playerHand.cards[i+1]
+                playerHand.cards[i+1] = tempCard
+            }
+        }
     }
 }
 
 function generateHands(){
+    if (playerHand.cards.length > 1) {if (yourTurn)sortPlayerHand()}
     generateHand(playerHand, playerHandEle, "playercard")
     generateHand(computerHand, computerHandEle, "computercard")
 }
@@ -86,7 +117,9 @@ function pcMoves(){
         let card = computerHand.cards[j]
 
         if (canPlay(card)){
-            yourTurn = !yourTurn
+            let action = checkValue(card)
+            actUpon(action)
+            // yourTurn = !yourTurn
             console.log("computer played:", card.value, card.suit)
             playCard(card)
             computerHand.cards.splice(j,1)
@@ -109,12 +142,44 @@ function drawCard(){
     inRound()
 }
     
+function checkValue(card){
+    if (card.value === "7"){
+        return "wait"
+    }
+    if (card.value === "8"){
+        return "wait"
+    }
+    if (card.value === "K"){
+        return "wait"
+    }
+    if (card.value ==="2"){
+        return "draw"
+    }
+    
+}
+
+function actUpon(action){
+    if (action === "wait"){
+        } else { yourTurn = !yourTurn }
+
+    if (action === "draw"){
+        if (yourTurn){
+            console.log("draw 2 cards")
+            playerHand.drawCards(2, deck)
+        } else { 
+            console.log("draw 2 cards")
+            computerHand.drawCards(2, deck)}
+    }
+}
+
+
 function addEventlisteners(){
     for (let i=0; i < playerHand.numberOfCards; i++){
         playerHandEle.children[i].addEventListener("click", function(){
             let card = playerHand.cards[i]
             if (canPlay(card)){
-                yourTurn = !yourTurn
+                let action = checkValue(card)
+                actUpon(action)
                 console.log("you played:", card.value, card.suit)
                 playCard(card)
                 playerHand.cards.splice(i,1)
