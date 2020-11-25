@@ -9,6 +9,37 @@
         <script type="module" src="main.js" defer></script>
     </head>
     <body>
+        <form>
+            <label for="fSuits">Aantal Soorten: ♥ ♠ ♦ ♣</label>
+            <input
+                type="number"
+                id="fSuits"
+                name="fSuits"
+                default="2"
+                placeholder="min 2 / max 4"
+            />
+
+            <label for="fCards">Aantal Kaarten/Soort:</label>
+            <input
+                type="number"
+                id="fCards"
+                name="fCards"
+                default="2"
+                placeholder="min 7 / max 13"
+            />
+
+            <label for="fJokers">Aantal Jokers:</label>
+            <input
+                type="number"
+                id="fJokers"
+                name="fJokers"
+                default="2"
+                placeholder="maximaal 4"
+            />
+
+            <input type="submit" id="submit" value="Start Game" />
+        </form>
+
         <div class="playingField">
             <div class="computerCards">
                 <!-- the cards of the opponent-->
@@ -27,6 +58,7 @@
             <div class="playerCards">
                 <!-- your cards-->
             </div>
+            <button class="sort">Sort Hand</button>
         </div>
     </body>
 </html>

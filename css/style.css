@@ -7,23 +7,63 @@
 }
 
 body {
-  height: 100vh;
   user-select: none;
 }
 
-body .playingField {
-  width: 100%;
-  height: 100%;
+body form {
+  margin-top: 3rem;
+  width: 100vw;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+body form label {
+  margin-bottom: -1.5rem;
+}
+
+body form input {
+  width: 50%;
+  max-width: 400px;
+  text-align: center;
+  margin: 2rem;
+}
+
+body form #submit {
+  padding: 0.5rem;
+  background: coral;
+  border: none;
+  border-radius: 1rem;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+body .playingField {
+  width: 100vw;
+  height: 100vh;
+  display: none;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+}
+
+body .playingField .sort {
+  position: absolute;
+  display: block;
+  width: 5rem;
+  height: 3rem;
+  padding: 0.5rem;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 5;
 }
 
 body .playingField .card {
   height: 8rem;
   width: 5rem;
-  margin: 0.2rem;
   border: 1px solid #000;
   border-radius: 0.5rem;
   display: flex;
@@ -37,7 +77,6 @@ body .playingField .card {
 body .playingField .joker {
   height: 8rem;
   width: 5rem;
-  margin: 0.2rem;
   border: 1px solid #000;
   border-radius: 0.5rem;
   display: flex;
@@ -112,9 +151,10 @@ body .playingField .card::after {
 }
 
 body .playingField .computerCards {
-  height: 11rem;
+  height: fit-content;
   max-width: 95% !important;
   width: 80%;
+  margin-top: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -122,7 +162,6 @@ body .playingField .computerCards {
 }
 
 body .playingField .computerCards .h2 {
-  margin-bottom: 3rem;
   line-height: 2rem;
   text-align: center;
 }
@@ -130,6 +169,18 @@ body .playingField .computerCards .h2 {
 body .playingField .computerCards .card {
   margin-left: -1rem;
   margin-right: -1rem;
+}
+
+body .playingField .computerCards .joker {
+  font-size: 0;
+  background: coral;
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+body .playingField .computerCards .joker::before,
+body .playingField .computerCards .joker::after {
+  font-size: 0;
 }
 
 body .playingField .middle {
@@ -148,10 +199,10 @@ body .playingField .middle .playedCards {
 }
 
 body .playingField .playerCards {
-  min-height: 11rem;
+  max-height: 20rem;
   height: fit-content;
   width: 80%;
-  margin-bottom: 7rem;
+  margin-bottom: 6rem;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -166,12 +217,16 @@ body .playingField .playerCards .h2 {
 }
 
 body .playingField .playerCards .card {
+  height: 8rem;
+  width: 5rem;
   margin-left: -1rem;
   margin-right: -1rem;
   margin-bottom: -5rem;
 }
 
 body .playingField .playerCards .joker {
+  height: 8rem;
+  width: 5rem;
   margin-left: -1rem;
   margin-right: -1rem;
   margin-bottom: -5rem;

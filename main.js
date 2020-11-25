@@ -33,25 +33,51 @@ const playerHandEle = document.querySelector(".playerCards")
 const computerHandEle = document.querySelector(".computerCards")
 const playedCardsEle = document.querySelector(".playedCards")
 const deckEle = document.querySelector(".cardStack")
+const form = document.querySelector("form")
+const playingField = document.querySelector(".playingField")
+const sortBtn = document.querySelector(".sort")
 
 let playedCard, playedCardHTML ,playerHand, computerHand, deck, emptyDeck
 let yourTurn = true
+
+sortBtn.addEventListener("click", () => {
+    if (playerHand.cards.length >1){
+        sortPlayerHand()
+        generateHands()
+        addEventlisteners()
+    }
+})
+form.addEventListener('submit', function getTarget(e) {
+    e.preventDefault()
+    form.style.display ="none"
+    playingField.style.display = "flex"
+
+    let suits = e.target.children[1].value
+    let values = e.target.children[3].value
+    let jokers = e.target.children[5].value
+    form.reset()
+
+    if (suits === "" || values === ""){   
+        suits = 4
+        values = 13
+        jokers = 2
+    }
+    createObjects(suits, values, jokers)
+   });
 
 deckEle.addEventListener("click", () =>{
     drawCard()
 })
 
-createObjects()
-function createObjects(){
-
-    deck = new Deck(4,13)
-    let jokerCards = deck.generateJokers(4)
-    console.log(jokerCards)
-
-    deck.cards.push(jokerCards)
-    deck.cards = deck.cards.flat()
-    console.log(deck.cards)
-    deck.shuffle()
+function createObjects(suits, values, jokers){
+    deck = new Deck(suits,values)
+   
+    let jokerCards = deck.generateJokers(jokers)
+    if (jokerCards.length > 0){
+        deck.cards.push(jokerCards)
+        deck.cards = deck.cards.flat()
+        deck.shuffle()
+    }
 
     emptyDeck = new Deck(0,0)
 
@@ -107,8 +133,6 @@ function inRound(){
     }
 }
 
-//&& (playerHand.cards[i].value != "Joker" || playerHand.cards[i+1].value != "Joker") || (playerHand.cards[i].value == "Joker")
-
 function sortPlayerHand(){
     for(let j=0; j<playerHand.cards.length; j++){
         for(let i=0; i<playerHand.cards.length-1; i++){
@@ -123,7 +147,7 @@ function sortPlayerHand(){
 }
 
 function generateHands(){
-    if (playerHand.cards.length > 1) {if (yourTurn)sortPlayerHand()}
+    // if (playerHand.cards.length > 1) {if (yourTurn)sortPlayerHand()}
     generateHand(playerHand, playerHandEle, "playercard")
     generateHand(computerHand, computerHandEle, "computercard")
 }

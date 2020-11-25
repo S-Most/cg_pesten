@@ -25,9 +25,9 @@ export default class Deck {
     }
 
     generateJokers(numJokers){
-        // if (numJokers !== 1 && numJokers !== 2 && numJokers !== 3 && numJokers !== 4){
-        //     numJokers = 2
-        // }
+        if (numJokers != 0 && numJokers != 1 && numJokers != 2 && numJokers != 3 && numJokers != 4){
+            numJokers = 2
+        }
         let cards = []
         for (let i=0; i<numJokers; i++){
             cards.push(new Card(JOKERSUITS[i], "Joker"))
