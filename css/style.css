@@ -8,6 +8,11 @@
 
 body {
   user-select: none;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 body form {
@@ -42,7 +47,7 @@ body form #submit {
 
 body .playingField {
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
   display: none;
   flex-direction: column;
   justify-content: space-between;
