@@ -113,12 +113,6 @@ body .playingField .black {
   color: black;
 }
 
-body .playingField .stack {
-  background: cornflowerblue;
-  color: #fff;
-  font-size: 3rem;
-}
-
 body .playingField .playercard,
 body .playingField .stack {
   cursor: pointer;
@@ -190,12 +184,17 @@ body .playingField .middle {
   align-items: center;
 }
 
-body .playingField .middle .cardStack .card {
-  margin: 0rem;
+body .playingField .middle .stack {
+  background: cornflowerblue;
+  color: #fff;
+  font-size: 3rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 body .playingField .middle .playedCards {
-  margin: 0rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 body .playingField .playerCards {

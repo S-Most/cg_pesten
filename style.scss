@@ -117,12 +117,6 @@ body {
             color: black;
         }
 
-        .stack {
-            background: cornflowerblue;
-            color: #fff;
-            font-size: 3rem;
-        }
-
         .playercard,
         .stack {
             cursor: pointer;
@@ -195,13 +189,17 @@ body {
             justify-content: center;
             align-items: center;
 
-            .cardStack {
-                .card {
-                    margin: 0rem;
-                }
+            .stack {
+                background: cornflowerblue;
+                color: #fff;
+                font-size: 3rem;
+                margin-left: 1rem;
+                margin-right: 1rem;
             }
+
             .playedCards {
-                margin: 0rem;
+                margin-left: 1rem;
+                margin-right: 1rem;
             }
         }
 
