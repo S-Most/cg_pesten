@@ -71,7 +71,7 @@ body {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.5rem;
+            font-size: 2rem;
             background: #fff;
             position: relative;
         }
@@ -79,7 +79,6 @@ body {
         .joker {
             height: 8rem;
             width: 5rem;
-            // margin: 0.2rem;
 
             border: 1px solid #000;
             border-radius: 0.5rem;
@@ -87,7 +86,7 @@ body {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.5rem;
+            font-size: 2rem;
             position: relative;
             background: #fff;
             color: cornflowerblue;
@@ -140,7 +139,7 @@ body {
         .card::after {
             content: attr(data-value);
             position: absolute;
-            font-size: 1.5rem;
+            font-size: 1rem;
             letter-spacing: -2px;
         }
 
