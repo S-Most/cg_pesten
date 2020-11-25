@@ -14,6 +14,7 @@ const VALUES = [
     "Q",
     "K",
 ]
+const JOKERSUITS = ["✯","✮","☆","★"]
 
 export default class Deck {
     constructor(suits, values, cards = generateDeck(suits,values)) {
@@ -24,12 +25,12 @@ export default class Deck {
     }
 
     generateJokers(numJokers){
-        if (numJokers !== 1 && numJokers !== 2 && numJokers !== 3 && numJokers !== 4){
-            numJokers = 2
-        }
+        // if (numJokers !== 1 && numJokers !== 2 && numJokers !== 3 && numJokers !== 4){
+        //     numJokers = 2
+        // }
         let cards = []
         for (let i=0; i<numJokers; i++){
-            cards.push(new Card("*", "Joker"))
+            cards.push(new Card(JOKERSUITS[i], "Joker"))
         } return cards
     }
 
@@ -68,8 +69,14 @@ class Card {
     generateHTML(){
         const cardDiv = document.createElement('div')
         cardDiv.innerText = this.suit
-        cardDiv.classList.add("card", this.color)
-        cardDiv.dataset.value = `${this.value} ${this.suit}`
+        if (this.value !== "Joker"){
+            cardDiv.classList.add("card", this.color)
+            cardDiv.dataset.value = `${this.value} ${this.suit}`
+        } else {
+            cardDiv.classList.add("joker")
+            cardDiv.dataset.value = "Joker"
+        }
+        
         return cardDiv
     }
 }

@@ -14,7 +14,19 @@ const CARD_VALUE_MAP = {
     "J": 11,
     "Q": 12,
     "K": 13,
-    "A": 14
+    "A": 14,
+    "Joker": 15
+}
+
+const CARD_SUITS_MAP = {
+    "♥": 5,
+    "♠": 6,
+    "♦": 7,
+    "♣": 8,    
+    "✯": 1,
+    "✮": 2,
+    "☆": 3,
+    "★": 4
 }
 
 const playerHandEle = document.querySelector(".playerCards")
@@ -63,8 +75,13 @@ function generateHand(hand,handEle,cardClass){
     handEle.innerHTML=""
     console.log(hand.cards.length, hand.cards)
     for(let i=0; i<hand.cards.length; i++) {
+        
         let cardObject = hand.cards[i].generateHTML()
+        if (hand.cards[i].value === "Joker"){
+            cardObject.classList.add("joker")
+        } else {
         cardObject.classList.add(cardClass)
+        }
         handEle.appendChild(cardObject)
     }
 }
@@ -90,11 +107,12 @@ function inRound(){
     }
 }
 
+//&& (playerHand.cards[i].value != "Joker" || playerHand.cards[i+1].value != "Joker") || (playerHand.cards[i].value == "Joker")
+
 function sortPlayerHand(){
     for(let j=0; j<playerHand.cards.length; j++){
         for(let i=0; i<playerHand.cards.length-1; i++){
-            if (playerHand.cards[i].suit < playerHand.cards[i+1].suit || 
-                playerHand.cards[i].suit == playerHand.cards[i+1].suit && CARD_VALUE_MAP[playerHand.cards[i].value] < CARD_VALUE_MAP[playerHand.cards[i+1].value]) {
+            if (CARD_SUITS_MAP[playerHand.cards[i].suit] < CARD_SUITS_MAP[playerHand.cards[i+1].suit] || (CARD_SUITS_MAP[playerHand.cards[i].suit] == CARD_SUITS_MAP[playerHand.cards[i+1].suit] && CARD_VALUE_MAP[playerHand.cards[i].value] < CARD_VALUE_MAP[playerHand.cards[i+1].value])) {
 
                 let tempCard = playerHand.cards[i]
                 playerHand.cards[i] = playerHand.cards[i+1]
@@ -223,7 +241,7 @@ function playCard(card){
 }
 
 function canPlay(card){
-    if (playedCard.value === card.value || playedCard.suit === card.suit || playedCard.suit === "*" || card.suit === "*"){
+    if (playedCard.value === card.value || playedCard.suit === card.suit || playedCard.value === "Joker" || card.value === "Joker"){
         return true
     } else { return false }
     
@@ -234,6 +252,7 @@ function checkEmpty(){
         deck = emptyDeck
         deck.shuffle()
         emptyDeck = new Deck(0,0)
+        updateDeckCount()
     }
 }
 
