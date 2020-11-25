@@ -69,7 +69,7 @@ body .playingField .card {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   background: #fff;
   position: relative;
 }
@@ -82,7 +82,7 @@ body .playingField .joker {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   position: relative;
   background: #fff;
   color: cornflowerblue;
@@ -135,7 +135,7 @@ body .playingField .card::before,
 body .playingField .card::after {
   content: attr(data-value);
   position: absolute;
-  font-size: 2rem;
+  font-size: 1.5rem;
   letter-spacing: -2px;
 }
 
